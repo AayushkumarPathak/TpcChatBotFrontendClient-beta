@@ -1,42 +1,43 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { GraduationCap, Lock, User } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
-import { Button } from '../components/ui/Button';
-import lpuLogo from '../assets/lpuLogo.svg';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Lock, User } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
+import { Button } from "../components/ui/Button";
+import lpuLogo from "../assets/lpuLogo.svg";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const { login, error: authError } = useAuth();
-  const [regNo, setRegNo] = useState('');
-  const [password, setPassword] = useState('');
+  const [regNo, setRegNo] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    console.log('Login form submitted');
+    setError("");
+    console.log("Login form submitted");
     if (!regNo.trim() || !password.trim()) {
-      setError('Please fill in all fields');
-      console.log('Validation failed: missing fields');
+      setError("Please fill in all fields");
+      console.log("Validation failed: missing fields");
       return;
     }
     setIsLoading(true);
     try {
       const loginPayload = { regNo, password };
-      console.log('Attempting login with:', loginPayload);
+     
       await login(loginPayload);
-      console.log('Login successful, navigating to /chat');
-      navigate('/chat');
+     
+      navigate("/chat");
+      
     } catch (err: any) {
-      console.error('Login error:', err);
-      setError(err.message || 'Login failed');
+      console.error("Login error:", err);
+      setError(err.message || "Login failed");
     }
-    // finally {
-    //   setIsLoading(false);
-    //   console.log('Login flow finished');
-    // }
+    finally {
+      setIsLoading(false);
+      console.log('Login flow finished');
+    }
   };
 
   return (
@@ -45,26 +46,25 @@ const LoginPage: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-28 h-28 rounded-2xl mb-4">
-           <img src={lpuLogo} alt="LPU Logo" className="w-28 h-28 " />
+            <img src={lpuLogo} alt="LPU Logo" className="w-28 h-28 " />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             TPC Query Assistant
           </h1>
-          <p className="text-gray-600">
-            Training & Placement Cell
-          </p>
+          <p className="text-gray-600">Training & Placement Cell</p>
         </div>
 
         {/* Login Card */}
         <div className="bg-white rounded-2xl shadow-xl p-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
-            Sign In
-          </h2>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Sign In</h2>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Registration Number */}
             <div>
-              <label htmlFor="regNo" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="regNo"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Registration Number
               </label>
               <div className="relative">
@@ -85,7 +85,10 @@ const LoginPage: React.FC = () => {
 
             {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Password
               </label>
               <div className="relative">
@@ -119,15 +122,18 @@ const LoginPage: React.FC = () => {
               isLoading={isLoading}
               className="w-full bg-orange-500 hover:bg-orange-400"
             >
-              {isLoading ? 'Signing in...' : 'Sign In'}
+              {isLoading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
 
           {/* Help Text */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Having trouble logging in?{' '}
-              <a href="#" className="text-primary-600 hover:text-primary-700 font-medium">
+              Having trouble logging in?{" "}
+              <a
+                href="#"
+                className="text-primary-600 hover:text-primary-700 font-medium"
+              >
                 Contact TPC Block 33-204
               </a>
             </p>

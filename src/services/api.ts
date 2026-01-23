@@ -1,10 +1,11 @@
 import axios, { type AxiosInstance } from 'axios';
 import type { LoginCredentials, AuthResponse, ChatRequest, ChatResponse } from '../types';
 
-const API_BASE_URL ='http://localhost:5001/api';
+const API_BASE_URL = import.meta.env.VITE_BACKEND_API_BASE_URL;
 
 class ApiService {
   private api: AxiosInstance;
+
 
   constructor() {
     this.api = axios.create({
@@ -58,12 +59,6 @@ class ApiService {
   // Chat APIs
   async sendMessage(request: ChatRequest): Promise<ChatResponse> {
     const response = await this.api.post<ChatResponse>('/chat/', request);
-    return response.data;
-  }
-
-  // Get policies (if needed for display)
-  async getPolicies(): Promise<any[]> {
-    const response = await this.api.get('/policies');
     return response.data;
   }
 }

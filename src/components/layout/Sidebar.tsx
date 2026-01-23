@@ -78,9 +78,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           <div>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-gray-500" /> Upcoming Drives
+                <Calendar className="w-4 h-4 text-gray-500" /> Companies Hired
               </h3>
-              <span className="text-xs text-orange-600 font-medium cursor-pointer hover:underline">View All</span>
+              <a href='https://www.lpu.in/placements.php' 
+              target='__blank'
+               className="text-xs text-orange-600 font-medium cursor-pointer hover:underline">View All</a>
             </div>
             <div className="space-y-3">
               {upcomingDrives.map((drive) => (
@@ -90,10 +92,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                   </div>
                   <div className="min-w-0">
                     <h4 className="font-bold text-gray-900 truncate">{drive.company}</h4>
-                    <p className="text-xs text-gray-500 font-medium">{drive.role}</p>
-                    <p className="text-[10px] text-gray-400 mt-0.5 font-medium bg-gray-100 inline-block px-2 py-0.5 rounded-full">
-                      {drive.date}
-                    </p>
+                  
+                  
                   </div>
                 </div>
               ))}
@@ -119,12 +119,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         {/* Footer Section */}
         <div className="p-4 border-t border-gray-200 bg-gray-50">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gray-900 rounded-xl flex items-center justify-center text-white shadow-lg">
+            <div className="w-10 h-10 bg-orange-700 rounded-xl flex items-center justify-center text-white shadow-lg">
               <Code className="w-5 h-5" />
             </div>
             <div>
               <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Developed By</p>
-              <p className="text-sm font-bold text-gray-900">Pathak Aayush LPU @2026</p>
+              <p className="text-sm font-bold text-gray-900">Pathak Aayush</p>
             </div>
           </div>
           <div className="mt-3 flex items-center justify-between text-[10px] text-gray-400 font-medium">
