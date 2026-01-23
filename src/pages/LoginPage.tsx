@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { GraduationCap, Lock, User } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Button } from '../components/ui/Button';
-// import { Input } from '../components/ui/Input';
+import lpuLogo from '../assets/lpuLogo.svg';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -40,12 +40,12 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-blue-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#FCF1F1] flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-600 rounded-2xl mb-4 shadow-lg">
-            <GraduationCap className="w-8 h-8 text-white" />
+          <div className="inline-flex items-center justify-center w-28 h-28 rounded-2xl mb-4">
+           <img src={lpuLogo} alt="LPU Logo" className="w-28 h-28 " />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             TPC Query Assistant
@@ -90,7 +90,7 @@ const LoginPage: React.FC = () => {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
+                  <Lock className="h-5 w-5 text-gray-400 " />
                 </div>
                 <input
                   id="password"
@@ -117,7 +117,7 @@ const LoginPage: React.FC = () => {
               variant="primary"
               size="lg"
               isLoading={isLoading}
-              className="w-full"
+              className="w-full bg-orange-500 hover:bg-orange-400"
             >
               {isLoading ? 'Signing in...' : 'Sign In'}
             </Button>
@@ -128,7 +128,7 @@ const LoginPage: React.FC = () => {
             <p className="text-sm text-gray-600">
               Having trouble logging in?{' '}
               <a href="#" className="text-primary-600 hover:text-primary-700 font-medium">
-                Contact TPC Coordinator
+                Contact TPC Block 33-204
               </a>
             </p>
           </div>
@@ -136,8 +136,7 @@ const LoginPage: React.FC = () => {
 
         {/* Footer */}
         <div className="mt-6 text-center text-sm text-gray-500">
-          <p>© 2024 Global University of Excellence</p>
-          <p className="mt-1">TPC Response time: ~24hrs</p>
+          <p>© 2025 Lovely Professional University</p>
         </div>
       </div>
     </div>

@@ -12,12 +12,16 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   message, 
   requiresHumanIntervention 
 }) => {
+  // Use the flag from message if not explicitly passed
+  const showHumanIntervention = typeof requiresHumanIntervention !== 'undefined'
+    ? requiresHumanIntervention
+    : message.requiresHumanIntervention;
   const isAI = message.sender === 'ai';
 
   return (
     <div className={`flex gap-3 ${isAI ? 'justify-start' : 'justify-end'} mb-4`}>
       {isAI && (
-        <div className="flex-shrink-0 w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center">
+        <div className="flex-shrink-0 w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
           <Bot className="w-5 h-5 text-white" />
         </div>
       )}
@@ -35,7 +39,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
           </p>
         </div>
         
-        {requiresHumanIntervention && isAI && (
+        {showHumanIntervention && isAI && (
           <div className="mt-2 flex items-center gap-2 text-orange-600 text-xs bg-orange-50 px-3 py-1.5 rounded-lg border border-orange-200">
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
             <span>This query may require TPC coordinator assistance</span>

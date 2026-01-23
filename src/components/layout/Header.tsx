@@ -1,14 +1,16 @@
 import React from 'react';
-import { GraduationCap, LogOut, Menu, X } from 'lucide-react';
+import { LogOut, Menu, X, RotateCcw } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import lpuLogo from '../../assets/lpuLogo.svg';
 
 interface HeaderProps {
   onToggleSidebar?: () => void;
   isSidebarOpen?: boolean;
+  onClearChat?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onToggleSidebar, isSidebarOpen }) => {
+export const Header: React.FC<HeaderProps> = ({ onToggleSidebar, isSidebarOpen, onClearChat }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -35,22 +37,33 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar, isSidebarOpen }
           )}
           
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
-              <GraduationCap className="w-6 h-6 text-white" />
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center">
+              <img src={lpuLogo} alt="LPU Logo" className="w-10 h-10" />
             </div>
             <div className="hidden sm:block">
               <h1 className="text-lg font-semibold text-gray-900">
-                TPC Query Assistant
+                TPC Query Assistant 
               </h1>
               <p className="text-xs text-gray-500">Training & Placement Cell</p>
             </div>
           </div>
         </div>
+        
+        {onClearChat && (
+          <button
+            onClick={onClearChat}
+            className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-colors ml-auto mr-2"
+            title="Reset Chat"
+          >
+            <RotateCcw className="w-4 h-4" />
+            <span className="hidden sm:inline">Reset Chat</span>
+          </button>
+        )}
 
         <div className="flex items-center gap-3">
           <div className="hidden sm:block text-right">
             <p className="text-sm font-medium text-gray-900">
-              {user?.registrationNo}
+              {user?.regNo}
             </p>
             {user?.name && (
               <p className="text-xs text-gray-500">{user.name}</p>

@@ -69,6 +69,9 @@ export const ChatInput: React.FC<ChatInputProps> = ({
       <p className="text-xs text-gray-500 mt-2 text-center">
         Press Enter to send, Shift + Enter for new line
       </p>
+      <p className="text-xs text-gray-500 text-center">
+       Ai Assistant can make mistakes. Check important info
+      </p>
     </form>
   );
 };

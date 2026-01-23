@@ -8,9 +8,11 @@ import { QuickActions } from '../components/chat/QuickActions';
 import type { Message } from '../types';
 import { apiService } from '../services/api';
 import { Bot } from 'lucide-react';
+import { useChatSession } from '../contexts/useChatSession';
 
 const ChatPage: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  // const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages, clearChat] = useChatSession<Message[]>('tpc_chat_history', []);
   const [isLoading, setIsLoading] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -18,14 +20,17 @@ const ChatPage: React.FC = () => {
 
   useEffect(() => {
     // Initial greeting message
-    const greeting: Message = {
-      id: '1',
-      content: "Hello! I'm your TPC Query Assistant. I can help with information about placement eligibility, registration rules, and general policies. How can I assist you today?",
-      sender: 'ai',
-      timestamp: new Date(),
-    };
-    setMessages([greeting]);
-  }, []);
+    if (messages.length === 0) {
+      const greeting: Message = {
+        id: '1',
+        content: "Hello! I'm your TPC Query Assistant. I can help with information about placement eligibility, registration rules, and general policies. How can I assist you today?",
+        sender: 'ai',
+        timestamp: new Date(),
+        requiresHumanIntervention: false,
+      };
+      setMessages([greeting]);
+    }
+  }, [messages, setMessages]);
 
   useEffect(() => {
     scrollToBottom();
@@ -57,15 +62,10 @@ const ChatPage: React.FC = () => {
         content: response.message,
         sender: 'ai',
         timestamp: new Date(),
+        requiresHumanIntervention: !!response.requiresHumanIntervention,
       };
 
       setMessages((prev) => [...prev, aiMessage]);
-
-      // Check if requires human intervention
-      if (response.requiresHumanIntervention) {
-        // You can handle this flag as needed (e.g., show a notification)
-        console.log('This query requires human intervention');
-      }
     } catch (error: any) {
       // Add error message
       const errorMessage: Message = {
@@ -73,6 +73,7 @@ const ChatPage: React.FC = () => {
         content: 'Sorry, I encountered an error processing your request. Please try again or contact the TPC coordinator.',
         sender: 'ai',
         timestamp: new Date(),
+        requiresHumanIntervention: false,
       };
       setMessages((prev) => [...prev, errorMessage]);
       console.error('Error sending message:', error);
@@ -96,6 +97,7 @@ const ChatPage: React.FC = () => {
         <Header
           onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           isSidebarOpen={isSidebarOpen}
+          onClearChat={clearChat}
         />
 
         {/* Chat Area */}
@@ -104,8 +106,8 @@ const ChatPage: React.FC = () => {
             {/* Messages */}
             {messages.length === 1 && (
               <div className="text-center mb-8">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 rounded-full mb-4">
-                  <Bot className="w-8 h-8 text-primary-600" />
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-400 rounded-full mb-4">
+                  <Bot className="w-8 h-8 text-white" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">
                   Welcome to TPC Query Assistant
@@ -120,20 +122,18 @@ const ChatPage: React.FC = () => {
               </div>
             )}
 
-            {messages.map((message, index) => (
+            {messages.map((message) => (
               <ChatMessage
                 key={message.id}
                 message={message}
-                requiresHumanIntervention={
-                  message.sender === 'ai' && index === messages.length - 1
-                }
+                requiresHumanIntervention={message.sender === 'ai' && message.requiresHumanIntervention}
               />
             ))}
 
             {/* Loading Indicator */}
             {isLoading && (
               <div className="flex gap-3 justify-start mb-4">
-                <div className="flex-shrink-0 w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center">
+                <div className="flex-shrink-0 w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
                   <Bot className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex items-center px-4 py-3 bg-gray-100 rounded-2xl rounded-tl-none">

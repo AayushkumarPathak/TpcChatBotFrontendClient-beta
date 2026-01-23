@@ -59,6 +59,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    sessionStorage.removeItem('tpc_chat_history')
     setUser(null);
     apiService.logout().catch(() => {});
   };
