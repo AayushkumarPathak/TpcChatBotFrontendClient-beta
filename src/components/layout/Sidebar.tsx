@@ -78,7 +78,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           <div>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-gray-500" /> Companies Hired
+                <Calendar className="w-4 h-4 text-gray-500" /> Companies Hire's
               </h3>
               <a href='https://www.lpu.in/placements.php' 
               target='__blank'
