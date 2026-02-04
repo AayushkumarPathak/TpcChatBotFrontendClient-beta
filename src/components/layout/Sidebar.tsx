@@ -74,7 +74,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             ))}
           </div>
 
-          {/* Upcoming Drives */}
+          {/* Companies */}
           <div>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider flex items-center gap-2">
@@ -92,8 +92,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                   </div>
                   <div className="min-w-0">
                     <h4 className="font-bold text-gray-900 truncate">{drive.company}</h4>
-                  
-                  
                   </div>
                 </div>
               ))}
@@ -129,7 +127,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           </div>
           <div className="mt-3 flex items-center justify-between text-[10px] text-gray-400 font-medium">
             <span>v1.0.0</span>
-            <span>Former SDE Intern 2025 <p className='text-orange-400'>Amazon</p> </span>
+            <a href='https://www.linkedin.com/in/aayush-kumar-pathak122165/' target='__blank'>LinkedIn </a>
           </div>
         </div>
       </aside>
