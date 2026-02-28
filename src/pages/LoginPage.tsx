@@ -59,6 +59,19 @@ const LoginPage: React.FC = () => {
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Sign In</h2>
 
+            {/* Demo credentials for college project */}
+            <div className="mb-4 p-3 bg-green-50 border border-blue-200 rounded text-xs text-gray-700 flex flex-col items-start">
+              <span className="font-semibold mb-1">Demo Credentials:</span>
+              <div className="flex flex-row gap-4">
+                <div>
+                  <span className="font-medium">Reg No.:</span> 12201010
+                </div>
+                <div>
+                  <span className="font-medium">Password:</span> TEST20220101
+                </div>
+              </div>
+              <span className="mt-1 text-[11px] text-gray-500">Use these to explore the app</span>
+            </div>
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Registration Number */}
             <div>
