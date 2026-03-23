@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import LoginPage from './pages/LoginPage';
 import ChatPage from './pages/ChatPage';
+import AdminLoginPage from './pages/AdminLoginPage';
+import RegisterAdminPage from './pages/RegisterAdminPage';
+import RegisterStudentsPage from './pages/RegisterStudentsPage';
 import { LoadingSpinner } from './components/ui/LoadingSpinner';
 
 // Protected Route Component
@@ -43,6 +46,17 @@ const PublicRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return <>{children}</>;
 };
 
+// Admin Protected Route Component
+const AdminProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const adminToken = localStorage.getItem('adminToken');
+
+  if (!adminToken) {
+    return <Navigate to="/adminLogin" replace />;
+  }
+
+  return <>{children}</>;
+};
+
 function AppRoutes() {
   return (
     <Routes>
@@ -60,6 +74,16 @@ function AppRoutes() {
           <ProtectedRoute>
             <ChatPage />
           </ProtectedRoute>
+        }
+      />
+      <Route path="/adminLogin" element={<AdminLoginPage />} />
+      <Route path="/registerAdmin" element={<RegisterAdminPage />} />
+      <Route
+        path="/registerStudents"
+        element={
+          <AdminProtectedRoute>
+            <RegisterStudentsPage />
+          </AdminProtectedRoute>
         }
       />
       <Route path="/" element={<Navigate to="/chat" replace />} />

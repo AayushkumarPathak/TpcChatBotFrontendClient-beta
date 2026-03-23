@@ -60,6 +60,32 @@ class ApiService {
     return response.data;
   }
 
+  // Admin Auth APIs
+  async registerAdmin(credentials: { email: string; password: string }): Promise<{ message: string; admin: { email: string; id: string } }> {
+    const token = localStorage.getItem('adminToken');
+    const response = await this.api.post('/auth/admin/register', credentials, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data;
+  }
+
+  async loginAdmin(credentials: { email: string; password: string }): Promise<{ token: string; email: string }> {
+    const response = await this.api.post('/auth/admin/login', credentials);
+    return response.data;
+  }
+
+  async registerBulkStudents(students: Array<{ regNo: string; name: string; dob: string }>): Promise<Array<{ regNo: string; name: string }>> {
+    const token = localStorage.getItem('adminToken');
+    const response = await this.api.post('/auth/register-bulk', students, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data;
+  }
+
   // Chat APIs
   async sendMessage(request: ChatRequest): Promise<ChatResponse> {
     const response = await this.api.post<ChatResponse>('/chat/', request);
