@@ -264,7 +264,7 @@ netlify deploy --prod
 
 ## 📄 License
 
-This project is part of the TPC system for Global University of Excellence.
+This project is part of the TPC system for Lovely Professional University.
 
 ## 👥 Support
 
@@ -274,4 +274,5 @@ For issues or questions:
 
 ---
 
-Built with ❤️ for  University of Excellence Training & Placement Cell
+Built with ❤️ for  Lovely Professional University, Training & Placement Cell.
+Transforming Education, Transforming India
