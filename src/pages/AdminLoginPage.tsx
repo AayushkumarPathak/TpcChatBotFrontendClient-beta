@@ -32,7 +32,7 @@ const AdminLoginPage: React.FC = () => {
       const response = await apiService.loginAdmin({ email, password });
       localStorage.setItem("adminToken", response.token);
       localStorage.setItem("adminEmail", response.email);
-      navigate("/registerStudents");
+      navigate("/adminPortal");
     } catch (err: any) {
       console.error("Admin login error:", err);
       setError(err.response?.data?.message || "Login failed");
@@ -167,7 +167,7 @@ const AdminLoginPage: React.FC = () => {
 
         {/* Footer */}
         <div className="mt-6 text-center text-sm text-gray-500">
-          <p>© 2025 Lovely Professional University</p>
+          <p>© 2026 Lovely Professional University</p>
         </div>
       </div>
     </div>

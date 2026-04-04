@@ -11,7 +11,7 @@ interface StudentData {
   dob: string;
 }
 
-const RegisterStudentsPage: React.FC = () => {
+const AdminPortal: React.FC = () => {
   const navigate = useNavigate();
   const [jsonInput, setJsonInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -147,11 +147,11 @@ const RegisterStudentsPage: React.FC = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => navigate("/adminUserTable")}
+              onClick={() => navigate("/adminDashboard")}
               className="flex items-center gap-2"
             >
               <Users className="h-4 w-4" />
-              View Admin/User Table
+              Admin Dashboard
             </Button>
             <Button
               variant="secondary"
@@ -170,9 +170,8 @@ const RegisterStudentsPage: React.FC = () => {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Bulk Student Registration
+            Student Registration
           </h1>
-          <p className="text-gray-600">Training & Placement Cell</p>
         </div>
 
         {/* Registration Card */}
@@ -291,11 +290,11 @@ const RegisterStudentsPage: React.FC = () => {
 
         {/* Footer */}
         <div className="mt-6 text-center text-sm text-gray-500">
-          <p>© 2025 Lovely Professional University</p>
+          <p>© 2026 Lovely Professional University</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default RegisterStudentsPage;
+export default AdminPortal;

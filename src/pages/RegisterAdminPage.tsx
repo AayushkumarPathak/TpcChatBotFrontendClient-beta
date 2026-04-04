@@ -70,7 +70,7 @@ const RegisterAdminPage: React.FC = () => {
         {/* Back Button (if logged in as admin) */}
         {isLoggedInAsAdmin && (
           <button
-            onClick={() => navigate("/registerStudents")}
+            onClick={() => navigate("/adminPortal")}
             className="mb-4 flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -257,7 +257,7 @@ const RegisterAdminPage: React.FC = () => {
 
         {/* Footer */}
         <div className="mt-6 text-center text-sm text-gray-500">
-          <p>© 2025 Lovely Professional University</p>
+          <p>© 2026 Lovely Professional University</p>
         </div>
       </div>
     </div>
