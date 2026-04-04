@@ -181,7 +181,7 @@ const LoginPage: React.FC = () => {
 
         {/* Footer */}
         <div className="mt-6 text-center text-sm text-gray-500">
-          <p>© 2025 Lovely Professional University</p>
+          <p>© 2026 Lovely Professional University</p>
         </div>
       </div>
     </div>

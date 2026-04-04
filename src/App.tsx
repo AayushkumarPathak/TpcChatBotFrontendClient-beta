@@ -5,9 +5,9 @@ import LoginPage from './pages/LoginPage';
 import ChatPage from './pages/ChatPage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import RegisterAdminPage from './pages/RegisterAdminPage';
-import RegisterStudentsPage from './pages/AdminPortal';
-import AdminUserTablePage from './pages/AdminDashboard';
 import { LoadingSpinner } from './components/ui/LoadingSpinner';
+import AdminPortal from './pages/AdminPortal';
+import AdminDashboard from './pages/AdminDashboard';
 
 // Protected Route Component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -80,18 +80,18 @@ function AppRoutes() {
       <Route path="/adminLogin" element={<AdminLoginPage />} />
       <Route path="/registerAdmin" element={<RegisterAdminPage />} />
       <Route
-        path="/registerStudents"
+        path="/adminPortal"
         element={
           <AdminProtectedRoute>
-            <RegisterStudentsPage />
+            <AdminPortal />
           </AdminProtectedRoute>
         }
       />
       <Route
-        path="/adminUserTable"
+        path="/adminDashboard"
         element={
           <AdminProtectedRoute>
-            <AdminUserTablePage />
+            <AdminDashboard />
           </AdminProtectedRoute>
         }
       />
