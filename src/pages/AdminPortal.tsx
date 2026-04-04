@@ -145,6 +145,15 @@ const RegisterStudentsPage: React.FC = () => {
               Add Admin
             </Button>
             <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate("/adminUserTable")}
+              className="flex items-center gap-2"
+            >
+              <Users className="h-4 w-4" />
+              View Admin/User Table
+            </Button>
+            <Button
               variant="secondary"
               size="sm"
               onClick={handleLogout}
