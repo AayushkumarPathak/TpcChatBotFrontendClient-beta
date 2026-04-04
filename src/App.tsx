@@ -5,7 +5,8 @@ import LoginPage from './pages/LoginPage';
 import ChatPage from './pages/ChatPage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import RegisterAdminPage from './pages/RegisterAdminPage';
-import RegisterStudentsPage from './pages/RegisterStudentsPage';
+import RegisterStudentsPage from './pages/AdminPortal';
+import AdminUserTablePage from './pages/AdminDashboard';
 import { LoadingSpinner } from './components/ui/LoadingSpinner';
 
 // Protected Route Component
@@ -83,6 +84,14 @@ function AppRoutes() {
         element={
           <AdminProtectedRoute>
             <RegisterStudentsPage />
+          </AdminProtectedRoute>
+        }
+      />
+      <Route
+        path="/adminUserTable"
+        element={
+          <AdminProtectedRoute>
+            <AdminUserTablePage />
           </AdminProtectedRoute>
         }
       />

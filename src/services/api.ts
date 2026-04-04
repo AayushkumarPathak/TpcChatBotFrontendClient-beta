@@ -1,3 +1,7 @@
+
+
+
+
 import axios, { type AxiosInstance } from 'axios';
 import type { LoginCredentials, AuthResponse, ChatRequest, ChatResponse } from '../types';
 
@@ -22,7 +26,11 @@ class ApiService {
     // Request interceptor to add token
     this.api.interceptors.request.use(
       (config) => {
-        const token = localStorage.getItem('token');
+        // Use adminToken for admin endpoints, token for others
+        const isAdminRoute = config.url?.startsWith('/admin') || config.url?.includes('/register-bulk');
+        const token = isAdminRoute
+          ? localStorage.getItem('adminToken')
+          : localStorage.getItem('token');
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
         }
@@ -89,6 +97,44 @@ class ApiService {
   // Chat APIs
   async sendMessage(request: ChatRequest): Promise<ChatResponse> {
     const response = await this.api.post<ChatResponse>('/chat/', request);
+    return response.data;
+  }
+
+  async fetchAllAdmins(): Promise<any[]> {
+    const token = localStorage.getItem('adminToken');
+    const response = await this.api.get('/admin/all-admins', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data.admins;
+  }
+
+  async fetchAllUsers(): Promise<any[]> {
+    const token = localStorage.getItem('adminToken');
+    const response = await this.api.get('/admin/all-users', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data.users;
+  }
+    async deleteStudent(regNo: string): Promise<any> {
+    const token = localStorage.getItem('adminToken');
+    const response = await this.api.delete(`/student/delete/${regNo}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data;
+  }
+    async updateStudent(regNo: string, data: { name: string; dob: string }): Promise<any> {
+    const token = localStorage.getItem('adminToken');
+    const response = await this.api.put(`/student/update/${regNo}`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
     return response.data;
   }
 }
